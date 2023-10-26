@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 0.45,
+  "ingredient": {
+    "tag": "minecraft:music_discs"
+  },
+  "result": "etcher:blank_disc"
+}

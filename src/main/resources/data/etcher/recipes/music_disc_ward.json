@@ -1,0 +1,11 @@
+{
+  "type": "etcher:etching",
+  "label": {
+    "item": "minecraft:moss_block"
+  },
+  "base": {
+    "item": "etcher:blank_disc"
+  },
+  "levels_required": 5,
+  "result": "minecraft:music_disc_ward"
+}

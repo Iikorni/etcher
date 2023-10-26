@@ -1,0 +1,50 @@
+{
+	"schemaVersion": 1,
+	"id": "etcher",
+	"version": "${version}",
+	"name": "Etcher",
+	"description": "Recycle and re-write music discs.",
+	"authors": [
+		"iikorni"
+	],
+	"contact": {
+		"sources": "https://github.com/iikorni/etcher"
+	},
+	"license": "Apache-2.0",
+	"icon": "assets/etcher/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			{
+				"value": "io.iikorni.etcher.Etcher",
+				"adapter": "kotlin"
+			}
+		],
+		"client": [
+			{
+				"value": "io.iikorni.etcher.EtcherClient",
+				"adapter": "kotlin"
+			}
+		],
+		"fabric-datagen": [
+			{
+				"value": "io.iikorni.etcher.EtcherDataGenerator",
+				"adapter": "kotlin"
+			}
+		]
+	},
+	"mixins": [
+		"etcher.mixins.json",
+		{
+			"config": "etcher.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.14.23",
+		"minecraft": "~1.20.2",
+		"java": ">=17",
+		"fabric-api": "*",
+		"fabric-language-kotlin": ">=1.9.10"
+	}
+}

@@ -1,0 +1,6 @@
+{
+  "item.etcher.blank_disc": "Blank Disc",
+  "itemGroup.etcher.main_group": "Etcher",
+  "block.etcher.etcher": "Etcher",
+  "container.etcher.cost": "Etching Cost: %d"
+}

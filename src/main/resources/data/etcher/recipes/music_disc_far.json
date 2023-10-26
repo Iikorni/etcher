@@ -1,0 +1,11 @@
+{
+  "type": "etcher:etching",
+  "label": {
+    "item": "minecraft:ender_pearl"
+  },
+  "base": {
+    "item": "etcher:blank_disc"
+  },
+  "levels_required": 5,
+  "result": "minecraft:music_disc_far"
+}
