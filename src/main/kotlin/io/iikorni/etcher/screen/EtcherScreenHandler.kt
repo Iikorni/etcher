@@ -117,7 +117,7 @@ class EtcherScreenHandler(syncId: Int, playerInventory: PlayerInventory, private
                 } else {
                     var match = world.recipeManager.getFirstMatch(EtchingRecipe.Type.INSTANCE, input, world)
                     if (match.isPresent) {
-                        val recipe = match.get().value
+                        val recipe = match.get()
                         output.setStack(0, recipe.result)
                         levelCost.set(recipe.levelsRequired)
                     } else {

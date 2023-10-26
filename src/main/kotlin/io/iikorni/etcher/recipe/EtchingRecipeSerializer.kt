@@ -1,41 +1,54 @@
 package io.iikorni.etcher.recipe
 
-import com.mojang.serialization.Codec
-import com.mojang.serialization.codecs.RecordCodecBuilder
+import com.google.gson.JsonObject
 import io.iikorni.etcher.Etcher
+import net.minecraft.item.ItemConvertible
 import net.minecraft.item.ItemStack
 import net.minecraft.network.PacketByteBuf
 import net.minecraft.recipe.Ingredient
 import net.minecraft.recipe.RecipeSerializer
 import net.minecraft.registry.Registries
 import net.minecraft.util.Identifier
+import net.minecraft.util.JsonHelper
+import java.util.function.Supplier
 
 class EtchingRecipeSerializer private constructor(): RecipeSerializer<EtchingRecipe> {
-
-    private val codec: Codec<EtchingRecipe> = RecordCodecBuilder.create { instance ->
-        val product = instance.group(
-            Ingredient.DISALLOW_EMPTY_CODEC.fieldOf("label").forGetter { recipe -> recipe.label },
-            Ingredient.DISALLOW_EMPTY_CODEC.fieldOf("base").forGetter  { recipe -> recipe.base },
-            Codec.INT.fieldOf("levels_required").forGetter { recipe -> recipe.levelsRequired },
-            Registries.ITEM.codec.xmap(::ItemStack, ItemStack::getItem).fieldOf("result").forGetter { recipe -> recipe.result}
-        )
-        product.apply(instance, ::EtchingRecipe)
-    }
-    override fun codec(): Codec<EtchingRecipe> = codec
-
-    override fun read(buf: PacketByteBuf): EtchingRecipe {
-        val label = Ingredient.fromPacket(buf)
-        val base = Ingredient.fromPacket(buf)
-        val levelsRequired = buf.readInt()
-        val result = buf.readItemStack()
-        return EtchingRecipe(label, base, levelsRequired, result)
-    }
-
     override fun write(buf: PacketByteBuf, recipe: EtchingRecipe) {
         recipe.label.write(buf)
         recipe.base.write(buf)
         buf.writeInt(recipe.levelsRequired)
         buf.writeItemStack(recipe.result)
+    }
+
+    override fun read(id: Identifier, json: JsonObject): EtchingRecipe {
+        val labelElement = when {
+            JsonHelper.hasArray(json, "label") -> JsonHelper.getArray(json, "label")
+            else -> JsonHelper.getObject(json, "label")
+        }
+        val label = Ingredient.fromJson(labelElement, false)
+
+        val baseElement = when {
+            JsonHelper.hasArray(json, "base") -> JsonHelper.getArray(json, "base")
+            else -> JsonHelper.getObject(json, "base")
+        }
+        val base = Ingredient.fromJson(baseElement, false)
+
+        val levelsRequired = JsonHelper.getInt(json, "levels_required", 0)
+
+        val resultIdentifier = Identifier(JsonHelper.getString(json, "result"))
+        val result = ItemStack(
+            Registries.ITEM.getOrEmpty(resultIdentifier).orElseThrow { IllegalStateException("Item: $resultIdentifier does not exist") }
+        );
+
+        return EtchingRecipe(id, label, base, levelsRequired, result)
+    }
+
+    override fun read(id: Identifier, buf: PacketByteBuf): EtchingRecipe {
+        val label = Ingredient.fromPacket(buf)
+        val base = Ingredient.fromPacket(buf)
+        val levelsRequired = buf.readInt()
+        val result = buf.readItemStack()
+        return EtchingRecipe(id, label, base, levelsRequired, result)
     }
 
     companion object {

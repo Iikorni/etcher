@@ -32,9 +32,9 @@
   },
   "requirements": [
     [
-      "has_the_recipe",
       "has_music_disc",
-      "has_blank_disc"
+      "has_blank_disc",
+      "has_the_recipe"
     ]
   ],
   "rewards": {
