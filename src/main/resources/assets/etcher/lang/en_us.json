@@ -2,5 +2,9 @@
   "item.etcher.blank_disc": "Blank Disc",
   "itemGroup.etcher.main_group": "Etcher",
   "block.etcher.etcher": "Etcher",
-  "container.etcher.cost": "Etching Cost: %d"
+  "container.etcher.cost": "Etching Cost: %d",
+  "advancements.etcher.root.title": "Etcher",
+  "advancements.etcher.root.description": "Obtain a music disc and get ready to recycle!",
+  "advancements.etcher.blank_disc.title": "Disco Inferno",
+  "advancements.etcher.blank_disc.description": "Sacrifice a music disc to a furnace to obtain a Blank Disc."
 }

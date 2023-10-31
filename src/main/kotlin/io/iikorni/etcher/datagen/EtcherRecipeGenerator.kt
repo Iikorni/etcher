@@ -22,15 +22,15 @@ class EtcherRecipeGenerator(output: FabricDataOutput) : FabricRecipeProvider(out
             EtcherItems.BLANK_DISC,
             0.45f,
             200)
-            .criterion("has_music_disc", FabricRecipeProvider.conditionsFromTag(ItemTags.MUSIC_DISCS))
+            .criterion("has_music_disc", conditionsFromTag(ItemTags.MUSIC_DISCS))
             .offerTo(exporter);
 
         ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, EtcherBlocks.ETCHER_BLOCK).pattern("iww").pattern("wdw").pattern("www")
             .input('w', Ingredient.fromTag(ItemTags.PLANKS))
             .input('i', Items.IRON_INGOT)
             .input('d', Items.DIAMOND)
-            .criterion("has_music_disc", FabricRecipeProvider.conditionsFromTag(ItemTags.MUSIC_DISCS))
-            .criterion("has_blank_disc", FabricRecipeProvider.conditionsFromItem(EtcherItems.BLANK_DISC))
+            .criterion("has_music_disc", conditionsFromTag(ItemTags.MUSIC_DISCS))
+            .criterion("has_blank_disc", conditionsFromItem(EtcherItems.BLANK_DISC))
             .offerTo(exporter)
     }
 

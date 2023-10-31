@@ -4,6 +4,7 @@ import com.mojang.datafixers.util.Pair
 import io.iikorni.etcher.Etcher
 import io.iikorni.etcher.init.EtcherGui
 import io.iikorni.etcher.init.EtcherItems
+import io.iikorni.etcher.recipe.DiscCloningRecipe
 import io.iikorni.etcher.recipe.EtchingRecipe
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
@@ -16,6 +17,7 @@ import net.minecraft.screen.Property
 import net.minecraft.screen.ScreenHandler
 import net.minecraft.screen.ScreenHandlerContext
 import net.minecraft.screen.slot.Slot
+import net.minecraft.state.property.BooleanProperty
 import net.minecraft.util.Identifier
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
@@ -26,9 +28,19 @@ class EtcherScreenHandler(syncId: Int, playerInventory: PlayerInventory, private
     val output = CraftingResultInventory()
 
     val levelCost: Property = Property.create()
+    val isCloning: Property = object : Property() {
+        private var _value: Boolean = false
+
+        override fun get(): Int = if (_value) 1 else 0
+
+        override fun set(value: Int) {
+            _value = value != 0
+        }
+    }
 
     init {
         addProperty(levelCost)
+        addProperty(isCloning)
         addSlot(Slot(input, 0, 40, 17))
         addSlot(object : Slot(input, 1, 40, 53) {
             override fun canInsert(stack: ItemStack): Boolean {
@@ -59,10 +71,13 @@ class EtcherScreenHandler(syncId: Int, playerInventory: PlayerInventory, private
             player.addExperienceLevels(-levelCost.get())
         }
 
-        input.removeStack(0, 1)
+        if (this.isCloning.get() == 0) {
+            input.removeStack(0, 1)
+        }
         input.removeStack(1, 1)
 
         this.levelCost.set(0)
+        this.isCloning.set(0)
     }
 
     private fun createInputInventory() = object : SimpleInventory(2) {
@@ -114,15 +129,26 @@ class EtcherScreenHandler(syncId: Int, playerInventory: PlayerInventory, private
                 if (input.getStack(0).isEmpty || input.getStack(1).isEmpty) {
                     output.setStack(0, ItemStack.EMPTY)
                     levelCost.set(0)
+                    isCloning.set(0)
                 } else {
-                    var match = world.recipeManager.getFirstMatch(EtchingRecipe.Type.INSTANCE, input, world)
-                    if (match.isPresent) {
-                        val recipe = match.get()
+                    val etcherMatch = world.recipeManager.getFirstMatch(EtchingRecipe.Type.INSTANCE, input, world)
+                    if (etcherMatch.isPresent) {
+                        val recipe = etcherMatch.get()
                         output.setStack(0, recipe.result)
                         levelCost.set(recipe.levelsRequired)
+                        isCloning.set(0)
                     } else {
-                        output.setStack(0, ItemStack.EMPTY)
-                        levelCost.set(0)
+                        val cloneMatch = world.recipeManager.getFirstMatch(DiscCloningRecipe.Type.INSTANCE, input, world)
+                        if (cloneMatch.isPresent) {
+                            val recipe = cloneMatch.get()
+                            output.setStack(0, recipe.craft(input, world.registryManager))
+                            levelCost.set(1)
+                            isCloning.set(1)
+                        } else {
+                            output.setStack(0, ItemStack.EMPTY)
+                            levelCost.set(0)
+                            isCloning.set(0)
+                        }
                     }
                 }
             }

@@ -1,0 +1,36 @@
+{
+  "criteria": {
+    "got_music_disc": {
+      "conditions": {
+        "items": [
+          {
+            "tag": "minecraft:music_discs"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "background": "minecraft:textures/block/jukebox_side.png",
+    "description": {
+      "translate": "advancements.etcher.root.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "etcher:etcher"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.etcher.root.title"
+    }
+  },
+  "requirements": [
+    [
+      "got_music_disc"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

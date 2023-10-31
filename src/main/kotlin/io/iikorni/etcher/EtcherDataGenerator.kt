@@ -4,6 +4,7 @@ import io.iikorni.etcher.datagen.EtcherModelGenerator
 import io.iikorni.etcher.datagen.EtcherRecipeGenerator
 import io.iikorni.etcher.datagen.EtcherLootTableGenerator
 import io.iikorni.etcher.datagen.EtcherBlockTagGenerator
+import io.iikorni.etcher.datagen.EtcherAdvancementGenerator
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator
 
@@ -13,6 +14,7 @@ object EtcherDataGenerator : DataGeneratorEntrypoint {
 
 		pack.addProvider(::EtcherModelGenerator)
 		pack.addProvider(::EtcherRecipeGenerator)
+		pack.addProvider(::EtcherAdvancementGenerator)
 		pack.addProvider(::EtcherLootTableGenerator)
 		pack.addProvider(::EtcherBlockTagGenerator)
 	}

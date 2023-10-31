@@ -1,0 +1,38 @@
+{
+  "parent": "minecraft:etcher/root",
+  "criteria": {
+    "got_blank_disc": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "etcher:blank_disc"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.etcher.blank_disc.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "etcher:blank_disc"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.etcher.blank_disc.title"
+    }
+  },
+  "requirements": [
+    [
+      "got_blank_disc"
+    ]
+  ],
+  "sends_telemetry_event": true
+}
