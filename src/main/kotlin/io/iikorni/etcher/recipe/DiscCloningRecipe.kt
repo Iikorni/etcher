@@ -33,9 +33,7 @@ class DiscCloningRecipe(private val _id: Identifier) : Recipe<SimpleInventory> {
 
     override fun getId(): Identifier = _id
 
-    override fun getSerializer(): RecipeSerializer<*> {
-        TODO("Not yet implemented")
-    }
+    override fun getSerializer(): RecipeSerializer<*> = DiscCloningRecipeSerializer.INSTANCE
 
     override fun getType(): RecipeType<*> = Type.INSTANCE
 
