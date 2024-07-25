@@ -1,5 +1,6 @@
 package io.iikorni.etcher.recipe
 
+import io.iikorni.etcher.Etcher
 import net.minecraft.inventory.SimpleInventory
 import net.minecraft.item.ItemStack
 import net.minecraft.recipe.Ingredient
@@ -7,6 +8,8 @@ import net.minecraft.recipe.Recipe
 import net.minecraft.recipe.RecipeSerializer
 import net.minecraft.recipe.RecipeType
 import net.minecraft.registry.DynamicRegistryManager
+import net.minecraft.registry.RegistryWrapper
+import net.minecraft.util.Identifier
 import net.minecraft.world.World
 
 class EtchingRecipe(val label: Ingredient, val base: Ingredient, val levelsRequired: Int, val result: ItemStack) : Recipe<SimpleInventory> {
@@ -15,12 +18,11 @@ class EtchingRecipe(val label: Ingredient, val base: Ingredient, val levelsRequi
         else -> label.test(inventory.getStack(0)) && base.test(inventory.getStack(1))
     }
 
-    override fun craft(inventory: SimpleInventory?, registryManager: DynamicRegistryManager?): ItemStack =
-        ItemStack.EMPTY
+    override fun craft(inventory: SimpleInventory?, lookup: RegistryWrapper.WrapperLookup?): ItemStack  = ItemStack.EMPTY
 
     override fun fits(width: Int, height: Int): Boolean = false
 
-    override fun getResult(registryManager: DynamicRegistryManager?): ItemStack = result
+    override fun getResult(registriesLookup: RegistryWrapper.WrapperLookup?) = ItemStack.EMPTY
 
     override fun getSerializer(): RecipeSerializer<EtchingRecipe> = EtchingRecipeSerializer.INSTANCE
 

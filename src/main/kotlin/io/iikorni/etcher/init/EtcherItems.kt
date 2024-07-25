@@ -1,7 +1,6 @@
 package io.iikorni.etcher.init
 
 import io.iikorni.etcher.Etcher
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup
 import net.minecraft.item.Item
 import net.minecraft.item.ItemGroup
@@ -14,7 +13,7 @@ import net.minecraft.util.Identifier
 import net.minecraft.util.Rarity
 
 object EtcherItems {
-    val BLANK_DISC = Item(FabricItemSettings().maxCount(1).rarity(Rarity.UNCOMMON))
+    val BLANK_DISC = Item(Item.Settings().maxCount(1).rarity(Rarity.UNCOMMON))
 
     fun init(registry: Registry<Item>) {
         Registry.register(registry, Identifier(Etcher.MOD_ID, "blank_disc"), BLANK_DISC);

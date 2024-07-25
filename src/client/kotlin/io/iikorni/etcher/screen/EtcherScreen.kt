@@ -13,7 +13,6 @@ class EtcherScreen(handler: EtcherScreenHandler,
                    val playerInventory: PlayerInventory, title: Text
 ) : HandledScreen<EtcherScreenHandler>(handler, playerInventory, title) {
     val TEXTURE = Identifier(Etcher.MOD_ID, "textures/gui/container/etcher.png")
-    val ERROR_TEXTURE = Identifier(Etcher.MOD_ID, "container/etcher/error")
 
     override fun drawBackground(context: DrawContext, delta: Float, mouseX: Int, mouseY: Int) {
         val x = (width - backgroundWidth) / 2;
@@ -21,7 +20,7 @@ class EtcherScreen(handler: EtcherScreenHandler,
         context.drawTexture(TEXTURE, x, y, 0, 0, backgroundWidth, backgroundHeight)
 
         if ((handler.getSlot(0).hasStack() || handler.getSlot(1).hasStack()) && !handler.getSlot(2).hasStack()) {
-            context.drawGuiTexture(ERROR_TEXTURE, x + 71, y + 32, 28, 21)
+            context.drawTexture(TEXTURE, x + 71, y + 32, backgroundWidth, 0, 28, 21)
         }
     }
 

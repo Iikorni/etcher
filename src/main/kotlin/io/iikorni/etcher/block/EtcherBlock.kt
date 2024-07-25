@@ -20,18 +20,17 @@ class EtcherBlock(settings: Settings) : Block(settings) {
     override fun getRenderType(state: BlockState): BlockRenderType = BlockRenderType.MODEL
 
     override fun onUse(
-        state: BlockState,
-        world: World,
-        pos: BlockPos,
-        player: PlayerEntity,
-        hand: Hand,
-        hit: BlockHitResult
+        state: BlockState?,
+        world: World?,
+        pos: BlockPos?,
+        player: PlayerEntity?,
+        hit: BlockHitResult?
     ): ActionResult {
-        if (!world.isClient) {
-            var screenHandlerFactory = state.createScreenHandlerFactory(world, pos)
+        if (!world!!.isClient) {
+            val screenHandlerFactory = state!!.createScreenHandlerFactory(world, pos)
 
             if (screenHandlerFactory != null) {
-                player.openHandledScreen(screenHandlerFactory)
+                player!!.openHandledScreen(screenHandlerFactory)
             }
         }
         return ActionResult.SUCCESS
@@ -41,7 +40,7 @@ class EtcherBlock(settings: Settings) : Block(settings) {
         state: BlockState?,
         world: World?,
         pos: BlockPos?
-    ): NamedScreenHandlerFactory? {
+    ): NamedScreenHandlerFactory {
         return SimpleNamedScreenHandlerFactory({ syncId: Int, inventory: PlayerInventory, player: PlayerEntity ->
             EtcherScreenHandler(
                 syncId,

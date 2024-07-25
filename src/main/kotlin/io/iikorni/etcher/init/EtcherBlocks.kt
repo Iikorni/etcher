@@ -2,8 +2,8 @@ package io.iikorni.etcher.init
 
 import io.iikorni.etcher.Etcher
 import io.iikorni.etcher.block.EtcherBlock
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.fabricmc.fabric.api.`object`.builder.v1.block.FabricBlockSettings
+import net.minecraft.block.AbstractBlock
 import net.minecraft.block.Block
 import net.minecraft.block.MapColor
 import net.minecraft.block.enums.Instrument
@@ -15,7 +15,7 @@ import net.minecraft.sound.BlockSoundGroup
 import net.minecraft.util.Identifier
 
 object EtcherBlocks {
-    val ETCHER_BLOCK: Block = EtcherBlock(FabricBlockSettings.create()
+    val ETCHER_BLOCK: Block = EtcherBlock(AbstractBlock.Settings.create()
         .mapColor(MapColor.DIRT_BROWN)
         .instrument(Instrument.BASS)
         .strength(2.0f, 6.0f)
@@ -26,7 +26,7 @@ object EtcherBlocks {
     }
 
     fun initItems(registry: Registry<Item>) {
-        Registry.register(registry, Identifier(Etcher.MOD_ID, "etcher"), BlockItem(ETCHER_BLOCK, FabricItemSettings()))
+        Registry.register(registry, Identifier(Etcher.MOD_ID, "etcher"), BlockItem(ETCHER_BLOCK, Item.Settings()))
     }
 
     fun registerMainGroup(_displayContext: ItemGroup.DisplayContext, entries: ItemGroup.Entries) {

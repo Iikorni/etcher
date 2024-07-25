@@ -5,9 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "etcher:blank_disc"
-            ]
+            "items": "etcher:blank_disc"
           }
         ]
       },
@@ -17,7 +15,7 @@
       "conditions": {
         "items": [
           {
-            "tag": "minecraft:music_discs"
+            "items": "#minecraft:music_discs"
           }
         ]
       },
@@ -41,6 +39,5 @@
     "recipes": [
       "etcher:etcher"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

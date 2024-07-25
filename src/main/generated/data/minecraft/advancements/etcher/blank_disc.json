@@ -1,0 +1,33 @@
+{
+  "parent": "minecraft:etcher/root",
+  "criteria": {
+    "got_blank_disc": {
+      "conditions": {
+        "items": [
+          {
+            "items": "etcher:blank_disc"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.etcher.blank_disc.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "etcher:blank_disc"
+    },
+    "title": {
+      "translate": "advancements.etcher.blank_disc.title"
+    }
+  },
+  "requirements": [
+    [
+      "got_blank_disc"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

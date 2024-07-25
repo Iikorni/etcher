@@ -12,10 +12,15 @@ object EtcherItemGroups {
     private val MAIN_GROUP: ItemGroup = FabricItemGroup.builder()
         .icon { ItemStack(EtcherItems.BLANK_DISC) }
         .displayName(Text.translatable("itemGroup.${Etcher.MOD_ID}.main_group"))
-        .entries(EtcherItems::registerMainGroup)
+        .entries(::registerMainGroup)
         .build()
 
     fun init(registry: Registry<ItemGroup>) {
         Registry.register(registry, Identifier(Etcher.MOD_ID, "main_group"), MAIN_GROUP)
+    }
+
+    private fun registerMainGroup(displayContext: ItemGroup.DisplayContext, entries: ItemGroup.Entries) {
+        EtcherBlocks.registerMainGroup(displayContext, entries)
+        EtcherItems.registerMainGroup(displayContext, entries)
     }
 }

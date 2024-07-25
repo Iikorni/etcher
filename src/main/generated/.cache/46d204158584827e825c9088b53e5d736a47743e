@@ -1,5 +1,5 @@
-// 1.20.2	2023-10-26T14:22:10.1030994	etcher/Model Definitions
+// 1.20.6	2024-07-25T16:54:15.0516982	Etcher/Model Definitions
 bd8856c1b3a6c05649e31f139a1626bc2c0e31a0 assets\etcher\blockstates\etcher.json
-07dc44b7424fbce9c576d8fcb227d6341cb38164 assets\etcher\models\item\etcher.json
 a90c45332a9c955f67b61289c98308128f95c46e assets\etcher\models\block\etcher.json
+07dc44b7424fbce9c576d8fcb227d6341cb38164 assets\etcher\models\item\etcher.json
 504b5417441d92a3103d2143ec4d2c95590849e1 assets\etcher\models\item\blank_disc.json
