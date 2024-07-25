@@ -18,7 +18,7 @@
     "www"
   ],
   "result": {
-    "item": "etcher:etcher"
-  },
-  "show_notification": true
+    "count": 1,
+    "id": "etcher:etcher"
+  }
 }

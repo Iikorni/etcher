@@ -4,7 +4,7 @@
       "conditions": {
         "items": [
           {
-            "tag": "minecraft:music_discs"
+            "items": "#minecraft:music_discs"
           }
         ]
       },
@@ -12,17 +12,14 @@
     }
   },
   "display": {
-    "announce_to_chat": true,
     "background": "minecraft:textures/block/jukebox_side.png",
     "description": {
       "translate": "advancements.etcher.root.description"
     },
-    "frame": "task",
-    "hidden": false,
     "icon": {
-      "item": "etcher:etcher"
+      "count": 1,
+      "id": "etcher:etcher"
     },
-    "show_toast": true,
     "title": {
       "translate": "advancements.etcher.root.title"
     }

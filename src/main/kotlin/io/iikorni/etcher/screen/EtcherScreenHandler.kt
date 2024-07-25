@@ -134,14 +134,14 @@ class EtcherScreenHandler(syncId: Int, playerInventory: PlayerInventory, private
                     val etcherMatch = world.recipeManager.getFirstMatch(EtchingRecipe.Type.INSTANCE, input, world)
                     if (etcherMatch.isPresent) {
                         val recipe = etcherMatch.get()
-                        output.setStack(0, recipe.result)
-                        levelCost.set(recipe.levelsRequired)
+                        output.setStack(0, recipe.value().result)
+                        levelCost.set(recipe.value().levelsRequired)
                         isCloning.set(0)
                     } else {
                         val cloneMatch = world.recipeManager.getFirstMatch(DiscCloningRecipe.Type.INSTANCE, input, world)
                         if (cloneMatch.isPresent) {
                             val recipe = cloneMatch.get()
-                            output.setStack(0, recipe.craft(input, world.registryManager))
+                            output.setStack(0, recipe.value().craft(input, world.registryManager))
                             levelCost.set(1)
                             isCloning.set(1)
                         } else {

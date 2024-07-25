@@ -6,5 +6,7 @@
   "ingredient": {
     "tag": "minecraft:music_discs"
   },
-  "result": "etcher:blank_disc"
+  "result": {
+    "id": "etcher:blank_disc"
+  }
 }

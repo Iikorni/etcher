@@ -7,17 +7,19 @@ import net.minecraft.recipe.Recipe
 import net.minecraft.recipe.RecipeSerializer
 import net.minecraft.recipe.RecipeType
 import net.minecraft.registry.DynamicRegistryManager
+import net.minecraft.registry.RegistryWrapper
 import net.minecraft.registry.tag.ItemTags
 import net.minecraft.util.Identifier
 import net.minecraft.world.World
 
-class DiscCloningRecipe(private val _id: Identifier) : Recipe<SimpleInventory> {
+class DiscCloningRecipe() : Recipe<SimpleInventory> {
     override fun matches(inventory: SimpleInventory, world: World): Boolean = when {
         inventory.size() < 2 -> false
         else -> inventory.getStack(0).isIn(ItemTags.MUSIC_DISCS) && inventory.getStack(1).isOf(EtcherItems.BLANK_DISC)
     }
-    override fun craft(inventory: SimpleInventory, registryManager: DynamicRegistryManager): ItemStack {
-        val inputDisc = inventory.getStack(0)
+
+    override fun craft(inventory: SimpleInventory?, lookup: RegistryWrapper.WrapperLookup?): ItemStack {
+        val inputDisc = inventory!!.getStack(0)
         val blankDisc = inventory.getStack(1)
 
         return when {
@@ -29,9 +31,7 @@ class DiscCloningRecipe(private val _id: Identifier) : Recipe<SimpleInventory> {
 
     override fun fits(width: Int, height: Int): Boolean = true
 
-    override fun getOutput(registryManager: DynamicRegistryManager?): ItemStack = ItemStack.EMPTY
-
-    override fun getId(): Identifier = _id
+    override fun getResult(registriesLookup: RegistryWrapper.WrapperLookup?): ItemStack = ItemStack.EMPTY
 
     override fun getSerializer(): RecipeSerializer<*> = DiscCloningRecipeSerializer.INSTANCE
 

@@ -1,5 +1,5 @@
-// 1.20.1	2023-10-26T16:48:04.1766602	Etcher/Recipes
-19f1d84256b8aa44fcfa133fa683fef980745e96 data\etcher\recipes\blank_disc.json
-8b19ef43168d87afdb321ba7cee1622668c744c9 data\etcher\recipes\etcher.json
-aa20d5e74f1e57f35efb542cbccf687c02850e98 data\etcher\advancements\recipes\misc\blank_disc.json
-3304429f19a4b60f09b31187bd3f225c9d47063b data\etcher\advancements\recipes\misc\etcher.json
+// 1.20.6	2024-07-25T16:54:15.0516982	Etcher/Recipes
+d135ab8a0fb9bb710d9dc28c9f196e6d9586ecaf data\etcher\advancements\recipes\misc\blank_disc.json
+7a2a662f3b12f55e1d5f768dc21dfe0d750f8826 data\etcher\recipes\etcher.json
+44e809f128a78a9457680d8d2df4cb259967c6a8 data\etcher\recipes\blank_disc.json
+48a21a28e912ecb12a5fffd8055ab8e364469490 data\etcher\advancements\recipes\misc\etcher.json

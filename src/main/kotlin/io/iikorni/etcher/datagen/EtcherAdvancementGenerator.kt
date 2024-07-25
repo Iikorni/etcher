@@ -6,16 +6,24 @@ import io.iikorni.etcher.init.EtcherItems
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricAdvancementProvider
 import net.minecraft.advancement.Advancement
+import net.minecraft.advancement.AdvancementEntry
 import net.minecraft.advancement.AdvancementFrame
 import net.minecraft.advancement.criterion.InventoryChangedCriterion
 import net.minecraft.predicate.item.ItemPredicate
+import net.minecraft.registry.RegistryWrapper
 import net.minecraft.registry.tag.ItemTags
 import net.minecraft.text.Text
 import net.minecraft.util.Identifier
+import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
-class EtcherAdvancementGenerator(output: FabricDataOutput?) : FabricAdvancementProvider(output) {
-    override fun generateAdvancement(consumer: Consumer<Advancement>?) {
+class EtcherAdvancementGenerator(output: FabricDataOutput?,
+                                 registryLookup: CompletableFuture<RegistryWrapper.WrapperLookup>?
+) : FabricAdvancementProvider(output, registryLookup) {
+    override fun generateAdvancement(
+        registryLookup: RegistryWrapper.WrapperLookup?,
+        consumer: Consumer<AdvancementEntry>?
+    ) {
         val root = Advancement.Builder.create()
             .display(
                 EtcherBlocks.ETCHER_BLOCK,
